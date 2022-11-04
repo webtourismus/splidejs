@@ -1,0 +1,7 @@
+{
+    "name": "webtourismus/splidejs",
+    "description": "Mirror of https://www.npmjs.com/package/@splidejs/splide as drupal-library",
+    "license": "MIT",
+    "type": "drupal-library",
+    "homepage": "https://splidejs.com/"
+}

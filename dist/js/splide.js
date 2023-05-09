@@ -4,9 +4,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 /*!
  * Splide.js
- * Version  : 4.1.4
+ * Version  : 4.1.4 (patched)
  * License  : MIT
  * Copyright: 2022 Naotoshi Fujita
+ *
+ * ===============
+ * !!! PATCHED !!!
+ * ===============
+ *
+ * This is a patched version that treats all children of the ".splide__list"
+ * constainer as a slide. It is no longer necessary to explicitly add the class
+ * ".splide__slide" to all slides. But this also means there _must not_ be any
+ * non-slide elements in the ".splide__list" container.
+ *
+ * Search for "CLASS_SLIDE_SELECTOR_REPLACEMENT" to see changes.
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Splide = factory());
@@ -689,6 +700,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   var CLASS_TRACK = CLASS_PREFIX + "track";
   var CLASS_LIST = CLASS_PREFIX + "list";
   var CLASS_SLIDE = CLASS_PREFIX + "slide";
+  var CLASS_SLIDE_SELECTOR_REPLACEMENT = "*";
   var CLASS_CLONE = CLASS_SLIDE + "--clone";
   var CLASS_CONTAINER = CLASS_SLIDE + "__container";
   var CLASS_ARROWS = CLASS_PREFIX + "arrows";
@@ -806,7 +818,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       track = find("." + CLASS_TRACK);
       list = child(track, "." + CLASS_LIST);
       assert(track && list, "A track/list element is missing.");
-      push(slides, children(list, "." + CLASS_SLIDE + ":not(." + CLASS_CLONE + ")"));
+      /* push(slides, children(list, "." + CLASS_SLIDE + ":not(." + CLASS_CLONE + ")")); */
+      push(slides, children(list, CLASS_SLIDE_SELECTOR_REPLACEMENT + ":not(." + CLASS_CLONE + ")"));
       forOwn({
         arrows: CLASS_ARROWS,
         pagination: CLASS_PAGINATION,
